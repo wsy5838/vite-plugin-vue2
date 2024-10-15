@@ -1,7 +1,8 @@
 {
-  "extends": "@antfu",
+  "plugins": ["prettier"],
+  "extends": ["@antfu", "plugin:prettier/recommended"],
   "rules": {
-    "react/no-unknown-property": "off",
+    "react/no-unknown-property": "off"
   },
   "overrides": [
     {

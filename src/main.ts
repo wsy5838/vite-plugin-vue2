@@ -155,7 +155,9 @@ async function genScriptCode(
       if (script.lang === 'ts') {
         // transformWithEsbuild has been exported since vite@2.6.0-beta.0
         const transformWithEsbuild
-          = Vite.transformWithEsbuild ?? options.devServer!.transformWithEsbuild
+          = Vite.transformWithEsbuild
+        // const transformWithEsbuild
+        //   = Vite.transformWithEsbuild ?? options.devServer!.transformWithEsbuild
         const result = await transformWithEsbuild(
           scriptCode,
           filename,
@@ -220,7 +222,7 @@ async function genCustomBlockCode(
 ) {
   let code = ''
   await Promise.all(
-    descriptor.customBlocks.map(async(block, index) => {
+    descriptor.customBlocks.map(async (block, index) => {
       const blockSrc
         = typeof block.attrs.src === 'string' ? block.attrs.src : ''
       const src = blockSrc || filename
@@ -257,19 +259,17 @@ if(!import.meta.env.SSR && __VUE_HMR_RUNTIME__.compatible){
     __VUE_HMR_RUNTIME__.createRecord(${idJSON}, __component__.options)
   }
    import.meta.hot.accept((update) => {
-      __VUE_HMR_RUNTIME__.${
-        functional ? 'rerender' : 'reload'
-      }(${idJSON}, update.default)
+      __VUE_HMR_RUNTIME__.${functional ? 'rerender' : 'reload'
+    }(${idJSON}, update.default)
    })
-   ${
-     templateRequest
-       ? `import.meta.hot.accept(${JSON.stringify(
-           normalizeDevPath(root, templateRequest),
-         )}, (update) => {
+   ${templateRequest
+      ? `import.meta.hot.accept(${JSON.stringify(
+        normalizeDevPath(root, templateRequest),
+      )}, (update) => {
       __VUE_HMR_RUNTIME__.rerender(${idJSON}, update)
    })`
-       : ''
-   }
+      : ''
+    }
 }`
 }
 
@@ -338,9 +338,8 @@ function attrsToQuery(
   for (const name in attrs) {
     const value = attrs[name]
     if (!ignoreList.includes(name)) {
-      query += `&${qs.escape(name)}${
-        value ? `=${qs.escape(String(value))}` : ''
-      }`
+      query += `&${qs.escape(name)}${value ? `=${qs.escape(String(value))}` : ''
+        }`
     }
   }
   if (langFallback || attrs.lang) {
