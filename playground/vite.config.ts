@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite'
 import { createVuePlugin } from '../src/index'
+import Inspect from 'vite-plugin-inspect'
+
 
 const config = defineConfig({
   resolve: {
@@ -12,6 +14,7 @@ const config = defineConfig({
     minify: false,
   },
   plugins: [
+    Inspect(),
     createVuePlugin({ jsx: true }),
     {
       name: 'customBlock',

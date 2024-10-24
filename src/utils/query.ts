@@ -10,6 +10,7 @@ export interface VueQuery {
   from?: string
 }
 
+// 解析模块路径
 export function parseVueRequest(id: string) {
   const [filename, rawQuery] = id.split('?', 2)
   const query = qs.parse(rawQuery) as VueQuery

@@ -67,7 +67,7 @@
     "magic-string": "^0.26.1",
     "prettier": "^2.8.8",
     "querystring": "^0.2.1",
-    "rollup": "^2.70.2",
+    "rollup": "^4.24.0",
     "slash": "^3.0.0",
     "source-map": "^0.7.3",
     "vue-template-babel-compiler": "^1.2.0"
@@ -84,6 +84,7 @@
     "@types/node": "^17.0.25",
     "@types/puppeteer": "^5.4.5",
     "bumpp": "^7.1.1",
+    "colors": "^1.4.0",
     "conventional-changelog-cli": "^2.2.2",
     "eslint": "^8.14.0",
     "execa": "^5.1.1",

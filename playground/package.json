@@ -4,7 +4,7 @@
   "private": true,
   "description": "",
   "scripts": {
-    "dev": "vite --debug",
+    "dev": "vite --force",
     "build": "vite build --debug",
     "serve": "vite preview"
   },
@@ -15,7 +15,9 @@
   },
   "devDependencies": {
     "@vue/runtime-dom": "^3.5.12",
+    "sass-embedded": "^1.79.5",
     "vite": "^5.4.9",
+    "vite-plugin-inspect": "^0.8.7",
     "vue-template-babel-compiler": "^1.2.0"
   }
 }

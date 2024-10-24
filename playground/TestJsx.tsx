@@ -1,4 +1,4 @@
-const word = 'JSX works!'
+const word = 'JSX workffffs!'
 
 export default {
   render() {

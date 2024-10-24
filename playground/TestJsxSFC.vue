@@ -1,5 +1,5 @@
-<script lang="tsx">
-const word = 'JSX & SFC works!'
+<script lang="jsx">
+const word = 'Jw22X & SFC asdasd!'
 
 export default {
   render() {

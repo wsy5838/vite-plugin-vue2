@@ -19,17 +19,23 @@ export async function transformMain(
 ) {
   const descriptor = createDescriptor(code, filePath, options)
 
+  console.log('解析vue文件成功'.bgBlue.red)
+
   const hasFunctional
     = descriptor.template && descriptor.template.attrs.functional
 
   // template
+  // 这里解析出来的 templateCode 是个 虚拟url  类似于 playground/App.vue?vue&type=template&lang.js 这样的
   const { code: templateCode, templateRequest } = await genTemplateRequest(
     filePath,
     descriptor,
     pluginContext,
   )
+
   // script
   const scriptVar = '__vue2_script'
+  // 这里解析出来的 scriptCode 如果是jsx  就是代码块中只有个 虚拟url 类似于 /App.vue?vue&type=script&lang.jsx 这样的
+  // 不是jsx 的场景 就是解析出来的code 代码
   const { scriptCode, map: scriptMap } = await genScriptCode(
     scriptVar,
     descriptor,
@@ -37,6 +43,7 @@ export async function transformMain(
     options,
     pluginContext,
   )
+
   // style
   const cssModuleVar = '__cssModules'
   const { scoped, stylesCode } = await genStyleRequest(
@@ -129,6 +136,11 @@ async function genScriptCode(
   map?: RawSourceMap
 }> {
   const { script } = descriptor
+
+  // script!.lang = 'jsx'
+
+  // console.log(script?.lang, 'asdasd')
+
   let scriptCode = `const ${scriptVar} = {}`
   if (!script)
     return { scriptCode }
@@ -137,6 +149,8 @@ async function genScriptCode(
   if (script) {
     // If the script is js/ts and has no external src, it can be directly placed
     // in the main module.
+    // 不是外部链接 是ts 或者没有lang（js）
+    // 直接使用解析出来的的代码
     if (
       (!script.lang || (script.lang === 'ts' && options.devServer))
       && !script.src
@@ -174,7 +188,7 @@ async function genScriptCode(
           map.sourcesContent = script.map.sourcesContent
       }
     }
-    else {
+    else {// jsx 类型的
       const src = script.src || filename
       const langFallback = (script.src && path.extname(src).slice(1)) || 'js'
       const attrsQuery = attrsToQuery(script.attrs, langFallback)

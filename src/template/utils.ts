@@ -90,3 +90,9 @@ function parseUriParts(urlString: string): UrlWithStringQuery {
   }
   return returnValue
 }
+
+
+export const scriptJsxRE = /<[^>]+>/
+export function isJsxCode(code?: string): boolean {
+  return scriptJsxRE.test(code || '')
+}
