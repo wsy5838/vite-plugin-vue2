@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
-import { createVuePlugin } from '../src/index'
+import { createVuePlugin, createVuePluginCss } from '../src/index'
 import Inspect from 'vite-plugin-inspect'
-
 
 const config = defineConfig({
   resolve: {
@@ -16,6 +15,7 @@ const config = defineConfig({
   plugins: [
     Inspect(),
     createVuePlugin({ jsx: true }),
+    createVuePluginCss({ jsx: true }),
     {
       name: 'customBlock',
       transform(code, id) {

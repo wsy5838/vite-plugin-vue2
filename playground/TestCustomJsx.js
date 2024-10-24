@@ -1,16 +1,16 @@
 const word = 'JS22X  cus222tom 123'
 
-const CCC = () => <div>2</div>
+const CCC = () => <div>2223</div>
 
 export default {
   data() {
     return {
-      aaa: 'f2ff',
+      aaa: 'ffffff',
     }
   },
   methods: {
     click(params) {
-      console.log(123121231313)
+      //  console.log('asdasdas')
     },
   },
   render() {
@@ -18,6 +18,8 @@ export default {
       <div class={'jsx'} onClick={this.click}>
         {this.aaa}
         {/* {word} */}
+        <CCC />
+        <CCC />
         <CCC />
       </div>
     )

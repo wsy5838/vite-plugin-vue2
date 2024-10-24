@@ -78,7 +78,7 @@ export function updateJsToJSX(script: SFCBlock | null, filename: string) {
       if (!script.attrs) {
         script.attrs = {}
       }
-      console.log('修正'.bgBlue.yellow, filename)
+      //  console.log('修正'.bgBlue.yellow, filename)
       script.attrs.lang = 'jsx'
       script.lang = 'jsx'
     }

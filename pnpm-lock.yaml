@@ -68,6 +68,9 @@ importers:
       debug:
         specifier: ^4.3.4
         version: 4.3.7(supports-color@9.4.0)
+      esbuild:
+        specifier: 0.21.5
+        version: 0.21.5
       eslint-config-prettier:
         specifier: ^9.1.0
         version: 9.1.0(eslint@8.57.1)
@@ -158,13 +161,13 @@ importers:
         version: 13.7.0
       ts-jest:
         specifier: ^27.1.4
-        version: 27.1.5(@babel/core@7.25.8)(@types/jest@27.5.2)(babel-jest@27.5.1(@babel/core@7.25.8))(jest@27.5.1)(typescript@4.9.5)
+        version: 27.1.5(@babel/core@7.25.8)(@types/jest@27.5.2)(babel-jest@27.5.1(@babel/core@7.25.8))(esbuild@0.21.5)(jest@27.5.1)(typescript@4.9.5)
       typescript:
         specifier: ^4.6.3
         version: 4.9.5
       vite:
-        specifier: ^5.4.9
-        version: 5.4.9(@types/node@17.0.45)(sass-embedded@1.79.5)
+        specifier: 5.4.8
+        version: 5.4.8(@types/node@17.0.45)(less@4.2.0)(sass-embedded@1.79.5)
       vue-template-compiler:
         specifier: ^2.6.14
         version: 2.7.16
@@ -187,15 +190,18 @@ importers:
       '@vue/runtime-dom':
         specifier: ^3.5.12
         version: 3.5.12
+      less:
+        specifier: ^4.2.0
+        version: 4.2.0
       sass-embedded:
         specifier: ^1.79.5
         version: 1.79.5
       vite:
         specifier: ^5.4.9
-        version: 5.4.9(@types/node@17.0.45)(sass-embedded@1.79.5)
+        version: 5.4.9(@types/node@17.0.45)(less@4.2.0)(sass-embedded@1.79.5)
       vite-plugin-inspect:
         specifier: ^0.8.7
-        version: 0.8.7(rollup@4.24.0)(vite@5.4.9(@types/node@17.0.45)(sass-embedded@1.79.5))
+        version: 0.8.7(rollup@4.24.0)(vite@5.4.9(@types/node@17.0.45)(less@4.2.0)(sass-embedded@1.79.5))
       vue-template-babel-compiler:
         specifier: ^1.2.0
         version: 1.2.0(vue-template-compiler@2.7.16)
@@ -1875,6 +1881,9 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
+  copy-anything@2.0.6:
+    resolution: {integrity: sha512-1j20GZTsvKNkc4BY3NpMOM8tt///wY3FpIzozTOFO2ffuZcV61nojHXVKIy3WM+7ADCy5FVhdZYHYDdgTU0yJw==}
+
   core-util-is@1.0.3:
     resolution: {integrity: sha1-pgQtNjTCsn6TKPg3uWX6yDgI24U=}
 
@@ -2072,6 +2081,10 @@ packages:
   entities@3.0.1:
     resolution: {integrity: sha1-K4h8piWF6W2zkDSC0zbBAGwwAdQ=}
     engines: {node: '>=0.12'}
+
+  errno@0.1.8:
+    resolution: {integrity: sha1-i7Ppx9Rjvkl2/4iPdrSAnrwugR8=}
+    hasBin: true
 
   error-ex@1.3.2:
     resolution: {integrity: sha1-tKxAZIEH/c3PriQvQovqihTU8b8=}
@@ -2618,12 +2631,21 @@ packages:
     resolution: {integrity: sha1-ICK0sl+93CHS9SSXSkdKr+czkIs=}
     engines: {node: '>=0.10.0'}
 
+  iconv-lite@0.6.3:
+    resolution: {integrity: sha1-pS+AvzjaGVLrXGgXkHGYcaGnJQE=}
+    engines: {node: '>=0.10.0'}
+
   ieee754@1.2.1:
     resolution: {integrity: sha1-jrehCmP/8l0VpXsAFYbRd9Gw01I=}
 
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
     engines: {node: '>= 4'}
+
+  image-size@0.5.5:
+    resolution: {integrity: sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=}
+    engines: {node: '>=0.10.0'}
+    hasBin: true
 
   immutable@4.3.7:
     resolution: {integrity: sha512-1hqclzwYwjRDFLjcFxOM5AYkkG0rpFPpr1RLPMEuGczoS7YA8gLhy8SWXYRAA/XwfEHpfo3cw5JGioS32fnMRw==}
@@ -2829,6 +2851,9 @@ packages:
   is-weakset@2.0.3:
     resolution: {integrity: sha512-LvIm3/KWzS9oRFHugab7d+M/GcBXuXX5xZkzPmN+NxihdQlZUQ4dWuSV1xR/sq6upL1TJEDrfBgRepHFdBtSNQ==}
     engines: {node: '>= 0.4'}
+
+  is-what@3.14.1:
+    resolution: {integrity: sha1-4SIvRt3ahd6tD9HJ3xMXYOd3VcE=}
 
   is-wsl@3.1.0:
     resolution: {integrity: sha512-UcVfVfaK4Sc4m7X3dUSoHoozQGBEFeDC+zVo06t98xe8CzHSZZBekNXH+tu0NalHolcJ/QAGqS46Hef7QXBIMw==}
@@ -3083,6 +3108,11 @@ packages:
     resolution: {integrity: sha1-p5yezIbuHOP6YgbRIWxQHxR/wH4=}
     engines: {node: '>=6'}
 
+  less@4.2.0:
+    resolution: {integrity: sha512-P3b3HJDBtSzsXUl0im2L7gTO5Ubg8mEN6G8qoTS77iXxXX4Hvu4Qj540PZDvQ8V6DmX6iXo98k7Md0Cm1PrLaA==}
+    engines: {node: '>=6'}
+    hasBin: true
+
   leven@3.1.0:
     resolution: {integrity: sha1-d4kd6DQGTMy6gq54QrtrFKE+1/I=}
     engines: {node: '>=6'}
@@ -3168,6 +3198,10 @@ packages:
     resolution: {integrity: sha512-hX9XH3ziStPoPhJxLq1syWuZMxbDvGNbVchfrdCtanC7D13888bMFow61x8axrx+GfHLtVeAx2kxL7tTGRl+Ow==}
     engines: {node: '>=12'}
 
+  make-dir@2.1.0:
+    resolution: {integrity: sha1-XwMQ4YuL6JjMBwCSlaMK5B6R5vU=}
+    engines: {node: '>=6'}
+
   make-dir@4.0.0:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
@@ -3221,6 +3255,11 @@ packages:
     resolution: {integrity: sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==}
     engines: {node: '>= 0.6'}
 
+  mime@1.6.0:
+    resolution: {integrity: sha1-Ms2eXGRVO9WNGaVor0Uqz/BJgbE=}
+    engines: {node: '>=4'}
+    hasBin: true
+
   mimic-fn@2.1.0:
     resolution: {integrity: sha1-ftLCzMyvhNP/y3pptXcR/CCDQBs=}
     engines: {node: '>=6'}
@@ -3266,6 +3305,11 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
+
+  needle@3.3.1:
+    resolution: {integrity: sha512-6k0YULvhpw+RoLNiQCRKOl09Rv1dPLr8hHnVjHqdolKwDrdNyk+Hmrthi4lIGPPz3r39dLx0hsF5s40sZ3Us4Q==}
+    engines: {node: '>= 4.4.x'}
+    hasBin: true
 
   neo-async@2.6.2:
     resolution: {integrity: sha1-tKr7k+OustgXTKU88WOrfXMIMF8=}
@@ -3416,6 +3460,10 @@ packages:
     resolution: {integrity: sha1-x2/Gbe5UIxyWKyK8yKcs8vmXU80=}
     engines: {node: '>=8'}
 
+  parse-node-version@1.0.1:
+    resolution: {integrity: sha1-4rXb7eAOf6m8NjYH9TMn6LBzGJs=}
+    engines: {node: '>= 0.10'}
+
   parse5@6.0.1:
     resolution: {integrity: sha1-4aHAhcVps9wIMhGE8Zo5zCf3wws=}
 
@@ -3479,6 +3527,10 @@ packages:
     resolution: {integrity: sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY=}
     engines: {node: '>=4'}
 
+  pify@4.0.1:
+    resolution: {integrity: sha1-SyzSXFDVmHNcUCkiJP2MbfQeMjE=}
+    engines: {node: '>=6'}
+
   pirates@4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
@@ -3540,6 +3592,9 @@ packages:
 
   proxy-from-env@1.1.0:
     resolution: {integrity: sha1-4QLxbKNVQkhldV0sno6k8k1Yw+I=}
+
+  prr@1.0.1:
+    resolution: {integrity: sha1-0/wRS6BplaRexok/SEzrHXj19HY=}
 
   pseudomap@1.0.2:
     resolution: {integrity: sha1-8FKijacOYYkX7wqKw0wa5aaChrM=}
@@ -3830,6 +3885,9 @@ packages:
     resolution: {integrity: sha512-QFdalnjGFkbNvb6/uQGmP4OIN+GQ5/R77eu0PsXduDB1YP5JW5DSWFVDAyK6l6C54P+3J3eXkjuPYC0mcwX+AA==}
     engines: {node: '>=16.0.0'}
     hasBin: true
+
+  sax@1.4.1:
+    resolution: {integrity: sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==}
 
   saxes@5.0.1:
     resolution: {integrity: sha1-7rq5U/o7dgjb6U5drbFciI+maW0=}
@@ -4286,6 +4344,37 @@ packages:
       vite: ^3.1.0 || ^4.0.0 || ^5.0.0-0
     peerDependenciesMeta:
       '@nuxt/kit':
+        optional: true
+
+  vite@5.4.8:
+    resolution: {integrity: sha512-FqrItQ4DT1NC4zCUqMB4c4AZORMKIa0m8/URVCZ77OZ/QSNeJ54bU1vrFADbDsuwfIPcgknRkmqakQcgnL4GiQ==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || >=20.0.0
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      sass-embedded: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      sass-embedded:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
         optional: true
 
   vite@5.4.9:
@@ -6182,6 +6271,10 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
+  copy-anything@2.0.6:
+    dependencies:
+      is-what: 3.14.1
+
   core-util-is@1.0.3: {}
 
   cross-fetch@3.1.5:
@@ -6357,6 +6450,11 @@ snapshots:
   entities@2.2.0: {}
 
   entities@3.0.1: {}
+
+  errno@0.1.8:
+    dependencies:
+      prr: 1.0.1
+    optional: true
 
   error-ex@1.3.2:
     dependencies:
@@ -7101,9 +7199,17 @@ snapshots:
     dependencies:
       safer-buffer: 2.1.2
 
+  iconv-lite@0.6.3:
+    dependencies:
+      safer-buffer: 2.1.2
+    optional: true
+
   ieee754@1.2.1: {}
 
   ignore@5.3.2: {}
+
+  image-size@0.5.5:
+    optional: true
 
   immutable@4.3.7: {}
 
@@ -7276,6 +7382,8 @@ snapshots:
     dependencies:
       call-bind: 1.0.7
       get-intrinsic: 1.2.4
+
+  is-what@3.14.1: {}
 
   is-wsl@3.1.0:
     dependencies:
@@ -7778,6 +7886,20 @@ snapshots:
 
   kleur@3.0.3: {}
 
+  less@4.2.0:
+    dependencies:
+      copy-anything: 2.0.6
+      parse-node-version: 1.0.1
+      tslib: 2.7.0
+    optionalDependencies:
+      errno: 0.1.8
+      graceful-fs: 4.2.11
+      image-size: 0.5.5
+      make-dir: 2.1.0
+      mime: 1.6.0
+      needle: 3.3.1
+      source-map: 0.6.1
+
   leven@3.1.0: {}
 
   levn@0.4.1:
@@ -7879,6 +8001,12 @@ snapshots:
     dependencies:
       sourcemap-codec: 1.4.8
 
+  make-dir@2.1.0:
+    dependencies:
+      pify: 4.0.1
+      semver: 5.7.2
+    optional: true
+
   make-dir@4.0.0:
     dependencies:
       semver: 7.6.3
@@ -7945,6 +8073,9 @@ snapshots:
     dependencies:
       mime-db: 1.52.0
 
+  mime@1.6.0:
+    optional: true
+
   mimic-fn@2.1.0: {}
 
   min-indent@1.0.1: {}
@@ -7976,6 +8107,12 @@ snapshots:
   natural-compare-lite@1.4.0: {}
 
   natural-compare@1.4.0: {}
+
+  needle@3.3.1:
+    dependencies:
+      iconv-lite: 0.6.3
+      sax: 1.4.1
+    optional: true
 
   neo-async@2.6.2: {}
 
@@ -8140,6 +8277,8 @@ snapshots:
       json-parse-even-better-errors: 2.3.1
       lines-and-columns: 1.2.4
 
+  parse-node-version@1.0.1: {}
+
   parse5@6.0.1: {}
 
   path-exists@3.0.0: {}
@@ -8175,6 +8314,9 @@ snapshots:
   pify@2.3.0: {}
 
   pify@3.0.0: {}
+
+  pify@4.0.1:
+    optional: true
 
   pirates@4.0.6: {}
 
@@ -8232,6 +8374,9 @@ snapshots:
       react-is: 16.13.1
 
   proxy-from-env@1.1.0: {}
+
+  prr@1.0.1:
+    optional: true
 
   pseudomap@1.0.2: {}
 
@@ -8528,6 +8673,9 @@ snapshots:
       sass-embedded-win32-arm64: 1.79.5
       sass-embedded-win32-ia32: 1.79.5
       sass-embedded-win32-x64: 1.79.5
+
+  sax@1.4.1:
+    optional: true
 
   saxes@5.0.1:
     dependencies:
@@ -8843,7 +8991,7 @@ snapshots:
 
   trim-newlines@3.0.1: {}
 
-  ts-jest@27.1.5(@babel/core@7.25.8)(@types/jest@27.5.2)(babel-jest@27.5.1(@babel/core@7.25.8))(jest@27.5.1)(typescript@4.9.5):
+  ts-jest@27.1.5(@babel/core@7.25.8)(@types/jest@27.5.2)(babel-jest@27.5.1(@babel/core@7.25.8))(esbuild@0.21.5)(jest@27.5.1)(typescript@4.9.5):
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
@@ -8859,6 +9007,7 @@ snapshots:
       '@babel/core': 7.25.8
       '@types/jest': 27.5.2
       babel-jest: 27.5.1(@babel/core@7.25.8)
+      esbuild: 0.21.5
 
   tsconfig-paths@3.15.0:
     dependencies:
@@ -8989,7 +9138,7 @@ snapshots:
 
   varint@6.0.0: {}
 
-  vite-plugin-inspect@0.8.7(rollup@4.24.0)(vite@5.4.9(@types/node@17.0.45)(sass-embedded@1.79.5)):
+  vite-plugin-inspect@0.8.7(rollup@4.24.0)(vite@5.4.9(@types/node@17.0.45)(less@4.2.0)(sass-embedded@1.79.5)):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.2(rollup@4.24.0)
@@ -9000,12 +9149,12 @@ snapshots:
       perfect-debounce: 1.0.0
       picocolors: 1.1.0
       sirv: 2.0.4
-      vite: 5.4.9(@types/node@17.0.45)(sass-embedded@1.79.5)
+      vite: 5.4.9(@types/node@17.0.45)(less@4.2.0)(sass-embedded@1.79.5)
     transitivePeerDependencies:
       - rollup
       - supports-color
 
-  vite@5.4.9(@types/node@17.0.45)(sass-embedded@1.79.5):
+  vite@5.4.8(@types/node@17.0.45)(less@4.2.0)(sass-embedded@1.79.5):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.47
@@ -9013,6 +9162,18 @@ snapshots:
     optionalDependencies:
       '@types/node': 17.0.45
       fsevents: 2.3.3
+      less: 4.2.0
+      sass-embedded: 1.79.5
+
+  vite@5.4.9(@types/node@17.0.45)(less@4.2.0)(sass-embedded@1.79.5):
+    dependencies:
+      esbuild: 0.21.5
+      postcss: 8.4.47
+      rollup: 4.24.0
+    optionalDependencies:
+      '@types/node': 17.0.45
+      fsevents: 2.3.3
+      less: 4.2.0
       sass-embedded: 1.79.5
 
   vue-class-component@7.2.6(vue@2.7.16):

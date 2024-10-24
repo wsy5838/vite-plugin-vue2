@@ -10,7 +10,7 @@ export default {
 
 <template>
   <div>
-    <h2>Hot Module 222222</h2>
+    <h2>Hot Module</h2>
     <p>
       <span>
         HMR: click button and edit template part of <code>./TestHmr.vue</code>,

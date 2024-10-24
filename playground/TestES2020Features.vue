@@ -6,7 +6,7 @@ export default Vue.extend({
 
   data() {
     return {
-      spreadArray: ['s', 'p', 'r', 'ead'],
+      spreadArray: ['s', 'pasdasdasasdasd', 'r', 'ead'],
     }
   },
 
@@ -16,7 +16,7 @@ export default Vue.extend({
         a: {
           d: undefined as unknown as undefined | { e: string },
           b: {
-            c: '2',
+            c: '2213123123123',
           },
         },
       }
@@ -31,18 +31,18 @@ export default Vue.extend({
     <h3>Nullish Coalescing and Optional Chaining</h3>
     <code>
       [nullish.a.b.c.d ?? 'not found']
-      <br>
+      <br />
       //returns {{ nullish.a.d?.e ?? 'not found' }}
-      <br>
-      <br>
+      <br />
+      <br />
       [nullish.a.b.c ?? 'not found']
-      <br>
+      <br />
       //returns {{ nullish.a.b.c ?? 'not found' }}
     </code>
     <h3>Spread Operator</h3>
     <code>
       ["Test", 1, ...('abc').split('')]
-      <br>
+      <br />
       //returns {{ ['Test', 1, ...'abc'.split('')] }}
     </code>
   </div>

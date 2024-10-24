@@ -15,7 +15,7 @@ export async function preTest() {
   try {
     await fs.remove(tempDir)
   }
-  catch (e) {}
+  catch (e) { }
   await fs.copy(fixtureDir, tempDir)
   binPath = path.resolve(tempDir, './node_modules/vite/bin/vite.js')
 
@@ -23,19 +23,19 @@ export async function preTest() {
 }
 
 async function build() {
-  console.log('building...')
+  //  console.log('building...')
   const buildOutput = await execa(binPath, ['build'], {
     cwd: tempDir,
   })
   expect(buildOutput.stderr).toBe('')
-  console.log('build complete. running build tests...')
+  //  console.log('build complete. running build tests...')
 }
 
 export async function postTest() {
   try {
     await fs.remove(tempDir)
   }
-  catch (e) {}
+  catch (e) { }
 }
 
 export async function startServer(isBuild: boolean) {
@@ -54,13 +54,13 @@ export async function startServer(isBuild: boolean) {
   await new Promise((resolve) => {
     devServer.stdout.on('data', (data: Buffer) => {
       if (data.toString().match('running')) {
-        console.log('dev server running.')
+        //  console.log('dev server running.')
         resolve('')
       }
     })
   })
 
-  console.log('launching browser')
+  //  console.log('launching browser')
   page = await browser.newPage()
   await page.goto('http://localhost:3000')
   return page

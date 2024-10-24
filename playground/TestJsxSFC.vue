@@ -1,5 +1,5 @@
-<script lang="jsx">
-const word = 'Jw22X & SFC asdasd!'
+<script>
+const word = 'addddsd'
 
 export default {
   render() {

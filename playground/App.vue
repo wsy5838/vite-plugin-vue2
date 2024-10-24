@@ -1,4 +1,4 @@
-<script lang="jsx">
+<script>
 // import TestMultiplySrcImport from './src-import/TestMultiplySrcImport.vue'
 // import TestBlockSrcImport from './src-import/TestBlockSrcImport.vue'
 // import TestScopedCss from './css/TestScopedCss.vue'
@@ -7,35 +7,30 @@
 // import TestCustomBlock from './custom/TestCustomBlock.vue'
 // import TestHmr from './hmr/TestHmr.vue'
 // import TestAssets from './test-assets/TestAssets.vue'
-// import TestJsx from './TestJsx.tsx'
-// import TestJsxAAA from './TestCustomJsx'
-// import TestJsxSFC from './TestJsxSFC.vue'
+import TestJsx from './TestJsx.tsx'
+import TestJsxAAA from './TestCustomJsx'
+import TestJsxSFC from './TestJsxSFC.vue'
+// import SlotCom from './slot.vue'
+
 // import TestDecorator from './TestDecorator.tsx'
 // import TestES2020Features from './TestES2020Features.vue'
 
 export default {
   name: 'App',
   components: {
-    // TestMultiplySrcImport,
-    // TestScopedCss,
-    // TestBlockSrcImport,
-    // TestCssModules,
-    // TestEmptyCss,
-    // TestCustomBlock,
-    // TestHmr,
-    // TestAssets,
-    // TestJsx,
-    // TestJsxAAA,
-    // TestJsxSFC,
-    // TestDecorator,
-    // TestES2020Features,
+    TestJsx,
+    TestJsxAAA,
+    TestJsxSFC,
+    // SlotCom,
+  },
+  created() {
+    //  console.log('asf222d')
   },
   methods: {
     onClick() {
-      console.log(12223)
-      const a = (h) => <div>222222</div>
-      // console.log(a)
-      // console.log(2223)
+      // //  console.log('ffq222wef')
+      //  console.log(a)
+      // //  console.log(2223)
     },
   },
 }
@@ -43,33 +38,42 @@ export default {
 
 <template>
   <div>
-    <h1 class="a" @click="onClick">111</h1>
-    <!-- <TestJsxSFC /> -->
+    <h1 class="a" @click="onClick">fdadad</h1>
+
+    <div class="a">
+      <div class="b"></div>
+    </div>
+    <!-- <SlotCom /> -->
+
+    <TestJsxSFC />
+
+    <br />
+    <br />
+    <TestJsxAAA />
 
     <br />
     <br />
     <br />
     <br />
-    <!-- <TestBlockSrcImport /> -->
-    <!-- <TestJsx /> -->
-
-    <!-- <TestJsxAAA /> -->
-    <!-- <TestMultiplySrcImport />
-    <TestBlockSrcImport />
-    <TestScopedCss />
-    <TestCssModules />
-    <TestCustomBlock />
-    <TestEmptyCss />
-    <TestHmr />
-    <TestAssets />
     <TestJsx />
-
-    <TestDecorator />
-    <TestES2020Features /> -->
   </div>
 </template>
-<style scoped>
-div {
+<style scoped lang="less">
+h1 {
   color: rgb(138, 43, 226);
+  font-size: 30px;
+}
+.a {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: yellow;
+  .b {
+    width: 50px;
+    height: 50px;
+    background-color: aqua;
+  }
 }
 </style>

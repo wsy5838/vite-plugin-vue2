@@ -19,7 +19,10 @@ export async function transformMain(
 ) {
   const descriptor = createDescriptor(code, filePath, options)
 
-  console.log('解析vue文件成功'.bgBlue.red)
+  // //  console.log('解析vue文件成功'.bgBlue.red)
+
+
+  // //  console.log(descriptor.script, 'ss')
 
   const hasFunctional
     = descriptor.template && descriptor.template.attrs.functional
@@ -139,7 +142,7 @@ async function genScriptCode(
 
   // script!.lang = 'jsx'
 
-  // console.log(script?.lang, 'asdasd')
+  // //  console.log(script?.lang, 'asdasd')
 
   let scriptCode = `const ${scriptVar} = {}`
   if (!script)

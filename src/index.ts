@@ -11,6 +11,8 @@ import { getDescriptor } from './utils/descriptorCache'
 import { transformStyle } from './style'
 import { handleHotUpdate } from './hmr'
 import { transformVueJsx } from './jsxTransform'
+import { isJsxCode } from './template/utils'
+import { esbuildPlugin } from './esbuild-plugin'
 import 'colors'
 
 export const vueComponentNormalizer = '\0/vite/vueComponentNormalizer'
@@ -54,36 +56,6 @@ export interface ResolvedOptions extends VueViteOptions {
   target?: string | string[]
 }
 
-// https://github.com/vitejs/vite/blob/e8c840abd2767445a5e49bab6540a66b941d7239/packages/vite/src/node/optimizer/scan.ts#L147
-// const scriptRE = /(<script\b(?:\s[^>]*>|>))(.*?)<\/script>/gims
-const scriptRE =
-  /(<script(?:\s+[a-z_:][-\w:]*(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^"'<>=\s]+))?)*\s*>)(.*?)<\/script>/gis
-// https://github.com/vitejs/vite/blob/e8c840abd2767445a5e49bab6540a66b941d7239/packages/vite/src/node/optimizer/scan.ts#L151
-// const langRE = /\blang\s*=\s*(?:"([^"]+)"|'([^']+)'|([^\s'">]+))/im
-const langRE = /\blang\s*=\s*(?:"([^"]+)"|'([^']+)'|([^\s'">]+))/i
-
-
-// const checkJSX = async (content: any) => {
-//   return new Promise(resolve => {
-//     if (content.indexOf('<script') > -1 && content.indexOf('</script>') > -1) {
-//       let hasJsx = false;
-//       content.replace(/<script.*?>([\s\S]+?)<\/script>/img, (_: any, js: any) => {    //正则匹配出script中的内容
-//         // 判断script内是否包含jsx语法
-//         if (/<[^>]+>/.test(js)) {
-//           hasJsx = true;
-//         }
-//         return js
-//       });
-//       resolve(hasJsx);
-//       return false;
-//     } else if (/<[^>]+>/.test(content)) {
-//       resolve(true);
-//       return false;
-//     }
-//     resolve(false);
-//   });
-// }
-
 
 export function createVuePlugin(rawOptions: VueViteOptions = {}): Plugin {
   const options: ResolvedOptions = {
@@ -96,14 +68,22 @@ export function createVuePlugin(rawOptions: VueViteOptions = {}): Plugin {
 
   return {
     name: 'vite-plugin-vue2',
-
     // 解析配置前
+    // 这里加入 esbuild插件，防止报错
     config(config) {
       console.log('启动1'.rainbow)
+      if (!config.optimizeDeps) config.optimizeDeps = {};
+      config.optimizeDeps = config.optimizeDeps || {};
+      config.optimizeDeps.esbuildOptions = config.optimizeDeps.esbuildOptions || {};
+      config.optimizeDeps.esbuildOptions.plugins = config.optimizeDeps.esbuildOptions.plugins || [];
+
+      // 注入 esbuild插件
+      config.optimizeDeps.esbuildOptions.plugins.push(esbuildPlugin)
+
       if (options.jsx) {
         return {
           esbuild: {
-            include: /\.ts$/,
+            include: /\.(ts)$/,
             exclude: /\.(tsx|jsx)$/,
           },
         }
@@ -113,7 +93,7 @@ export function createVuePlugin(rawOptions: VueViteOptions = {}): Plugin {
 
     // 解析配置后
     configResolved(config) {
-      console.log('启动2'.rainbow)
+      // //  console.log('启动2'.rainbow)
 
       options.isProduction = config.isProduction
       options.root = config.root
@@ -121,28 +101,28 @@ export function createVuePlugin(rawOptions: VueViteOptions = {}): Plugin {
 
     // 开发服务器（node）配置项
     configureServer(server) {
-      console.log('启动3'.rainbow)
-
+      // //  console.log('启动3'.rainbow)
 
       options.devServer = server
     },
 
     // 热更新入口函数
     handleHotUpdate(ctx) {
-      console.log('热更新1'.rainbow)
-
-      console.log(util.inspect(ctx, { showHidden: false, colors: true }))
-
-      if (!filter(ctx.file))
+      //  console.log('热更新1'.rainbow)
+      //  console.log(ctx.file)
+      // 不是.vue的 直接忽略,不由本插件处理
+      if (!filter(ctx.file)) {
+        //  console.log(ctx.file.yellow)
         return
+      }
 
       return handleHotUpdate(ctx, options)
     },
 
     // 解析模块首先方法，id 粗浅可以理解为 需要解析的模块路径 如：虚拟路径,alias 路径 
-    // 正常可以解析的路径不走这个方法，比如同目录一个a.js,只要路径正确是指向这个的 不走，别的都走 ps: ./a.vue or @/a.js
+    // 正常可以解析的路径不走这个方法(被其他前置插件跳过了)，比如同目录一个a.js,只要路径正确是指向这个的 不走，别的都走 ps: ./a.vue or @/a.js
     resolveId(id) {
-      console.log('解析1'.rainbow, id)
+      // //  console.log('解析1'.rainbow, id)
 
       if (id === vueComponentNormalizer || id === vueHotReload) {
 
@@ -156,7 +136,7 @@ export function createVuePlugin(rawOptions: VueViteOptions = {}): Plugin {
     },
 
     load(id) {
-      console.log('加载1'.rainbow, id)
+      // //  console.log('加载1'.rainbow, id)
       // 组件归一化代码（sfc .vue文件 处理 js css template对象）
       if (id === vueComponentNormalizer)
         return normalizeComponentCode
@@ -176,7 +156,7 @@ export function createVuePlugin(rawOptions: VueViteOptions = {}): Plugin {
 
         // 解析vue文件 分出 js css tmp
         const descriptor = getDescriptor(filename)!
-        // console.log(!!descriptor, 'descriptor')
+        // //  console.log(!!descriptor, 'descriptor')
         let block: SFCBlock | null | undefined
 
         if (query.type === 'script')
@@ -200,43 +180,27 @@ export function createVuePlugin(rawOptions: VueViteOptions = {}): Plugin {
     },
 
     async transform(code, id) {
-      console.log('加载2'.rainbow, id)
+      // //  console.log('加载2'.rainbow, id)
 
       const { filename, query } = parseVueRequest(id)
-
-      // if (/\.(vue)$/.test(id)) {
-      //   let hasJsx = false;
-      //   code.replace(/<script.*?>([\s\S]+?)<\/script>/img, (_, js) => {    //正则匹配出script中的内容
-      //     // 判断script内是否包含jsx语法和是否已加lang="jsx"
-      //     if (/<[^>]+>/.test(js) &&
-      //       /<script.*?>/.test(_) &&
-      //       !(/<script\s*lang=("|')jsx("|').*?>/.test(_))) {
-      //       hasJsx = true;
-      //     }
-      //     return js
-      //   });
-      //   if (hasJsx) {
-      //     code = code.replace('<script', '<script lang="jsx"');
-      //   }
-      // }
 
       // jsx类型的文件
       // .jsx .tsx   /App.vue?vue&type=script&lang.jsx
       if (/\.(tsx|jsx)$/.test(id)) {
 
-        console.log(id, 1233)
+        //  console.log(id, 1233)
 
         return transformVueJsx(code, id, options.jsxOptions)
       }
 
       // 如果js里 有jsx代码  按照js转化
-      if (!query.vue && /\.(js)$/.test(id) && /<[^>]+>/.test(code)) {
+      if (!query.vue && /\.(js)$/.test(id) && isJsxCode(code)) {
         return transformVueJsx(code, id, options.jsxOptions)
       }
 
       // 不是.vue 也不是jsx类型的 会走到这里，ps:普通js文件 css/scss文件等
       if ((!query.vue && !filter(filename)) || query.raw) {
-        console.log('不被本插件处理'.green)
+        // //  console.log('不被本插件处理'.green)
         return
       }
 
@@ -244,17 +208,17 @@ export function createVuePlugin(rawOptions: VueViteOptions = {}): Plugin {
       // 可以理解成第一步
       // 出来的 初次编译的 带有虚拟路径 和热更新的代码
       if (!query.vue) {
-        console.log('我是原始vue文件'.blue, id)
+        //  console.log('我是原始vue文件'.blue, id)
         // main request
         let res = await transformMain(code, filename, options, this as any)
 
-        // console.log(res, 999)
+        // //  console.log(res, 999)
 
         return res
       }
 
 
-      console.log('文件'.red.bgCyan, id)
+      //  console.log('文件'.red.bgCyan, id)
 
 
       // 这两类
@@ -283,5 +247,27 @@ export function createVuePlugin(rawOptions: VueViteOptions = {}): Plugin {
         )
       }
     },
+
+    transformIndexHtml(html, ctx) {
+
+      console.log(ctx.bundle, 123123)
+      console.log(ctx.chunk, 123123)
+      return html.replace(
+        /<title>(.*?)<\/title>/,
+        `<title>Title replaced!</title>`,
+      )
+    },
+  }
+}
+
+
+export function createVuePluginCss(rawOptions: VueViteOptions = {}): Plugin {
+
+  return {
+    name: 'vite-plugin-vue2-xxx',
+    async generateBundle(output, bundle) {
+      console.log('output', output, 111)
+      console.log('bundle', bundle, 222)
+    }
   }
 }

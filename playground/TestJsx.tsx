@@ -1,7 +1,7 @@
-const word = 'JSX workffffs!'
+const word = 'JSX!!!!!!!!!!'
 
 export default {
   render() {
-    return <div class={'jsx'}> {word} </div>
+    return <div class={'jsx'}> {word} asdads</div>
   },
 }

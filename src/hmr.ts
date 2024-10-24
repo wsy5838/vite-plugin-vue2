@@ -18,6 +18,8 @@ export async function handleHotUpdate(
   { file, modules, read }: HmrContext,
   options: ResolvedOptions,
 ): Promise<ModuleNode[] | void> {
+
+  //  console.log('filefile', file)
   const prevDescriptor = getDescriptor(file, false)
   if (!prevDescriptor) {
     // file hasn't been requested yet (e.g. async component)
@@ -29,11 +31,16 @@ export async function handleHotUpdate(
   const content = await read()
   const descriptor = createDescriptor(content, file, options)
 
+
   let needRerender = false
   const affectedModules = new Set<ModuleNode | undefined>()
+  // 主模块  url是原始.vue 或者是 type=script的虚拟路径
   const mainModule = modules.find(
     m => !/type=/.test(m.url) || /type=script/.test(m.url),
   )
+
+  //  console.log('mainModulemainModule2', mainModule!.url)
+
   const templateModule = modules.find(m => /type=template/.test(m.url))
 
   if (!isEqualBlock(descriptor.script, prevDescriptor.script)) {
@@ -46,6 +53,9 @@ export async function handleHotUpdate(
     }
     affectedModules.add(scriptModule || mainModule)
   }
+
+
+  // //  console.log('affectedModules', affectedModules)
 
   if (!isEqualBlock(descriptor.template, prevDescriptor.template)) {
     affectedModules.add(templateModule)
@@ -130,9 +140,16 @@ export async function handleHotUpdate(
   if (updateType.length)
     debug(`[vue:update(${updateType.join('&')})] ${file}`)
 
-  return [...affectedModules].filter(Boolean) as ModuleNode[]
+
+
+  let list = [...affectedModules].filter(Boolean) as ModuleNode[]
+
+  //  console.log('list', list.length)
+
+  return list
 }
 
+// 判断两个块是不是相等
 function isEqualBlock(a: SFCBlock | null, b: SFCBlock | null) {
   if (!a && !b)
     return true
